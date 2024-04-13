@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE mycat:schema SYSTEM "schema.dtd">
+<mycat:schema xmlns:mycat="http://io.mycat/">
+    <schema name="centraldb" checkSQLschema="false" sqlMaxLimit="100" randomDataNode="dn1" dataNode="dn1">
+    </schema>
+    <dataNode name="dn1" dataHost="lp" database="centraldb" />
+    <dataHost name="lp" maxCon="1000" minCon="10" balance="1"
+              writeType="0" dbType="mysql" dbDriver="native" switchType="1"  slaveThreshold="100">
+        <heartbeat>select user()</heartbeat>
+        <writeHost host="hostM1" url="172.31.15.246:3306" user="mycat"
+                   password="Vm0Irt7pvY,d">
+	<readHost host="hostS1" url="172.31.7.86:3306" user="mycat" password="Vm0Irt7pvY,d" />
+        </writeHost>
+    </dataHost>
+</mycat:schema>
